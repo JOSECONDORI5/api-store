@@ -1,0 +1,53 @@
+### Save product
+//@no-log
+POST http://localhost:8091/products
+Content-Type: application/json
+
+{
+  "name": "Samsung Galaxy A12",
+  "description": "Comfort and tendency do not have to be at adds.",
+  "stock": null,
+  "price": 3,
+  "category": {"id": 2, "name": "electronics"}
+}
+
+### Get product by id
+//@no-log
+GET http://localhost:8091/products/1
+
+### Update product
+//@no-log
+PUT http://localhost:8091/products/4
+Content-Type: application/json
+
+{
+  "name": "Samsung Galaxy A12",
+  "description": "Ultimate smartphone.",
+  "price": 35,
+  "category": {"id": 3, "name": "electronics"}
+}
+
+### List product by category
+//@no-log
+GET http://localhost:8091/products?categoryId=2
+
+### Update stock product
+//@no-log
+PUT http://localhost:8091/products/4/stock?quantity=10
+
+### List product
+//@no-log
+GET http://localhost:8091/products
+
+### Get error when save product
+//@no-log
+POST http://localhost:8091/products
+Content-Type: application/json
+
+{
+  "name": "",
+  "description": "Comfort and tendency do not have to be at adds.",
+  "stock": 0,
+  "price": 3,
+  "category": {"id": 2, "name": "electronics"}
+}

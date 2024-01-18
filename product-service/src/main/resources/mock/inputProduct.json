@@ -1,0 +1,13 @@
+{
+  "id": 1,
+  "name": "computer",
+  "description": "PC DELL",
+  "stock": 10,
+  "price": 1240.99,
+  "status": "CREATED",
+  "createAt": "2027-09-26T05:54:17",
+  "category": {
+    "id": 3,
+    "name": "electronics"
+  }
+}

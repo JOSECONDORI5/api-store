@@ -1,0 +1,66 @@
+### Save customer
+//@no-log
+POST http://localhost:8092/customers
+Content-Type: application/json
+
+{
+  "firstName": "Juan",
+  "numberId": "75453238",
+  "lastName": "Sanchez Sanchez",
+  "email": "juan@gmail.com",
+  "photoUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D",
+  "region": {
+    "id": 2,
+    "name": "Centroamérica"
+  }
+}
+
+### Get customers
+//@no-log
+GET http://localhost:8092/customers
+
+### Update customer
+//@no-log
+PUT http://localhost:8092/customers/2
+Content-Type: application/json
+
+{
+  "firstName": "Juan Jose",
+  "numberId": "75453238",
+  "lastName": "Sanchez Sanchez",
+  "email": "juan_jose@gmail.com",
+  "photoUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D",
+  "region": {
+    "id": 2,
+    "name": "Centroamérica"
+  }
+}
+
+### Get by id
+//@no-log
+GET http://localhost:8092/customers/2
+
+### Delete customer
+//@no-log
+DELETE http://localhost:8092/customers/2
+
+### Get all customers
+//@no-log
+GET http://localhost:8092/customers
+
+### Get error when save product
+//@no-log
+POST http://localhost:8092/customers
+Content-Type: application/json
+
+{
+  "firstName": "Juan",
+  "numberId": "7545323844444",
+  "lastName": "Sanchez Sanchez",
+  "email": "juangmail.com",
+  "photoUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D",
+  "region": {
+    "id": 2,
+    "name": "Centroamérica"
+  }
+}

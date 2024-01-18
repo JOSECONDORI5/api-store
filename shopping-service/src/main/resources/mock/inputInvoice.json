@@ -1,0 +1,18 @@
+{
+  "id": 2,
+  "numberInvoice": "002",
+  "description": "invoice store",
+  "customerId": 2,
+  "items": [
+    {
+      "quantity": 1.0,
+      "price": 178.89,
+      "productId": 1
+    },
+    {
+      "quantity": 2.0,
+      "price": 40.606,
+      "productId": 3
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+### Save Invoice
+//@no-log
+POST http://localhost:8093/invoices
+Content-Type: application/json
+
+{
+  "numberInvoice": "002",
+  "description": "invoice store",
+  "customerId": 2,
+  "items": [
+    {
+      "quantity": 1,
+      "price": 178.89,
+      "productId": 1
+    },
+    {
+      "quantity": 2,
+      "price": 40.606,
+      "productId": 3
+    }
+  ]
+}
+
+### Get all invoices
+//@no-log
+GET http://localhost:8093/invoices
+
+### Update invoice
+//@no-log
+PUT http://localhost:8093/invoices/2
+Content-Type: application/json
+
+{
+  "numberInvoice": "002",
+  "description": "new invoice store 2024",
+  "customerId": 2,
+  "items": [
+    {
+      "quantity": 2,
+      "price": 170,
+      "productId": 1
+    },
+    {
+      "quantity": 2,
+      "price": 40.606,
+      "productId": 3
+    }
+  ]
+}
+
+### Get invoices by id
+//@no-log
+GET http://localhost:8093/invoices/2
+
+### Delete invoices
+//@no-log
+DELETE http://localhost:8093/invoices
+
+### Get invoices
+//@no-log
+GET http://localhost:8093/invoices
+
+### Get error when save Invoice
+//@no-log
+POST http://localhost:8093/invoices
+Content-Type: application/json
+
+{
+  "numberInvoice": "002",
+  "description": "invoice store",
+  "customerId": 2,
+  "items": [
+    {
+      "quantity": 0,
+      "price": 178.89,
+      "productId": 1
+    },
+    {
+      "quantity": 2,
+      "price": 40.606,
+      "productId": 3
+    }
+  ]
+}
