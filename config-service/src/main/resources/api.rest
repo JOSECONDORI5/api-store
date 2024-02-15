@@ -1,3 +1,4 @@
 ### Get config source: http://<security_user>:<security_password>@localhost:8081/<name_service>/<profile>
 //@no-log
-GET http://root:s3cr3t@localhost:8081/customer-service/default
+//GET http://root:s3cr3t@localhost:8081/shopping-service/dev
+GET http://root:s3cr3t@localhost:8081/gateway-service/dev

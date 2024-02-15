@@ -1,0 +1,3 @@
+# Access to eureka
+//@no-log
+GET http://localhost:8099

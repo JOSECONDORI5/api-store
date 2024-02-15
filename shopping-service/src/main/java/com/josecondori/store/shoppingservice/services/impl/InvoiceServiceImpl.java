@@ -1,12 +1,19 @@
 package com.josecondori.store.shoppingservice.services.impl;
 
 import com.josecondori.store.shoppingservice.models.constants.enums.EnumInvoiceState;
+import com.josecondori.store.shoppingservice.models.entities.Customer;
 import com.josecondori.store.shoppingservice.models.entities.Invoice;
+import com.josecondori.store.shoppingservice.models.entities.Product;
 import com.josecondori.store.shoppingservice.repositories.InvoiceRepository;
 import com.josecondori.store.shoppingservice.services.InvoiceService;
+import com.josecondori.store.shoppingservice.services.clients.CustomerClient;
+import com.josecondori.store.shoppingservice.services.clients.ProductClient;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -14,6 +21,13 @@ import java.util.List;
 public class InvoiceServiceImpl implements InvoiceService {
 
     private final InvoiceRepository invoiceRepository;
+
+    @Qualifier("customer-service")
+    private final CustomerClient customerClient;
+
+    private final ProductClient productClient;
+
+    private final CircuitBreakerFactory circuitBreakerFactory;
 
     @Override
     public List<Invoice> findInvoiceAll() {
@@ -28,7 +42,13 @@ public class InvoiceServiceImpl implements InvoiceService {
             return invoiceDB;
         }
         invoice.setState(EnumInvoiceState.CREATED.getDescription());
-        return invoiceRepository.save(invoice);
+        invoiceDB = invoiceRepository.save(invoice);
+        invoiceDB.getItems().forEach(invoiceItem -> {
+            invoiceItem.setPrice(null);
+            Double quantity = circuitBreakerFactory.create("getPrice").run(invoiceItem::getPrice, p -> BigDecimal.ZERO.doubleValue());
+            productClient.updateStockProduct(invoiceItem.getProductId(), quantity * -1);
+        });
+        return invoiceDB;
     }
 
 
@@ -60,6 +80,17 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public Invoice getInvoice(Long id) {
-        return invoiceRepository.findById(id).orElse(null);
+        Invoice invoice = invoiceRepository.findById(id).orElse(null);
+        if (null != invoice) {
+            Customer customer = customerClient.getCustomer(invoice.getCustomerId()).getBody();
+            invoice.setCustomer(customer);
+            invoice.getItems()
+                    .forEach(invoiceItem -> {
+                        Product product = productClient.getProduct(invoiceItem.getProductId()).getBody();
+                        invoiceItem.setProduct(product);
+                    });
+            invoice.setItems(invoice.getItems());
+        }
+        return invoice;
     }
 }

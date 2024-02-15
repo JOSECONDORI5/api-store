@@ -1,3 +1,7 @@
+### Get invoices by id
+//@no-log
+GET http://localhost:8093/invoices/1
+
 ### Save Invoice
 //@no-log
 POST http://localhost:8093/invoices

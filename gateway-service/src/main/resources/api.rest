@@ -1,0 +1,14 @@
+### Get customers
+//@no-log
+GET http://localhost:8080/customers
+Content-Type: application/json
+
+### Get invoices
+//@no-log
+GET http://localhost:8080/invoices/2
+Content-Type: application/json
+
+### Get products
+//@no-log
+GET http://localhost:8080/products
+Content-Type: application/json

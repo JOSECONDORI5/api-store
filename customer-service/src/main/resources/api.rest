@@ -48,7 +48,7 @@ DELETE http://localhost:8092/customers/2
 //@no-log
 GET http://localhost:8092/customers
 
-### Get error when save product
+### Get error when save product by invalid email
 //@no-log
 POST http://localhost:8092/customers
 Content-Type: application/json

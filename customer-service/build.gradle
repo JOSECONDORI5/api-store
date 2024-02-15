@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.0.1'
+    id 'org.springframework.boot' version '3.2.1'
     id 'io.spring.dependency-management' version '1.1.4'
 }
 
@@ -9,6 +9,10 @@ version = '0.0.1-SNAPSHOT'
 
 java {
     sourceCompatibility = '17'
+}
+
+ext {
+    set('springCloudVersion', "2023.0.0")
 }
 
 configurations {
@@ -22,15 +26,29 @@ repositories {
 }
 
 dependencies {
+    /* Sleuth dependency */
+    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth:2.2.1.RELEASE'
+    /* Admin client dependency */
+    implementation 'de.codecentric:spring-boot-admin-starter-client:3.1.3'
+    /* Actuator dependency */
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     /* Starter config dependency */
     implementation 'org.springframework.cloud:spring-cloud-starter-config:4.0.3'
+    /* Eureka client dependency */
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 tasks.named('test') {
